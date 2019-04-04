@@ -36,5 +36,13 @@ public class ParkingLotTest {
         parkingLot.park(new Car());
     }
 
-    
+    @Test
+    public void should_pick_car_success_when_picking_1_car_given_1_valid_receipt_in_1_parking_lot() throws NoSpaceInParkingLotException {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car = new Car();
+        Receipt receipt = parkingLot.park(car);
+
+        Assert.assertSame(car, parkingLot.pickBy(receipt));
+    }
+
 }

@@ -1,14 +1,13 @@
 package parkinglot.beta;
 
 import parkinglot.beta.exceptions.NoSpaceInParkingLotException;
-import parkinglot.exception.NoParkingException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ParkingLot {
     final private int capacity;
-    final private List<Car> parkingLot = new ArrayList<>();
+    final private Map<Receipt, Car> parkingLot = new HashMap<>();
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
@@ -18,8 +17,13 @@ public class ParkingLot {
         if (parkingLot.size() >= capacity) {
             throw new NoSpaceInParkingLotException("No parking space!");
         }
-        parkingLot.add(car);
-        return new Receipt();
+        Receipt receipt = new Receipt();
+        parkingLot.put(receipt, car);
+        return receipt;
+    }
+
+    public Car pickBy(Receipt receipt) {
+        return parkingLot.get(receipt);
     }
 }
 
