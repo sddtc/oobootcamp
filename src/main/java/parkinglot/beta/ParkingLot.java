@@ -27,7 +27,7 @@ public class ParkingLot {
         if (null == receipt || !parkingLot.containsKey(receipt)) {
             throw new InvalidReceiptException("Invalid receipt!");
         }
-        return parkingLot.get(receipt);
+        return parkingLot.remove(receipt);
     }
 }
 
