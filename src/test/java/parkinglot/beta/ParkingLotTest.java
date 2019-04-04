@@ -2,6 +2,7 @@ package parkinglot.beta;
 
 import org.junit.Assert;
 import org.junit.Test;
+import parkinglot.beta.exceptions.InvalidReceiptException;
 import parkinglot.beta.exceptions.NoSpaceInParkingLotException;
 
 
@@ -37,7 +38,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_pick_car_success_when_picking_1_car_given_1_valid_receipt_in_1_parking_lot() throws NoSpaceInParkingLotException {
+    public void should_pick_car_success_when_picking_1_car_given_1_valid_receipt_in_1_parking_lot() throws NoSpaceInParkingLotException, InvalidReceiptException {
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
         Receipt receipt = parkingLot.park(car);
@@ -45,4 +46,9 @@ public class ParkingLotTest {
         Assert.assertSame(car, parkingLot.pickBy(receipt));
     }
 
+    @Test(expected = InvalidReceiptException.class)
+    public void should_throw_error_when_picking_1_car_given_0_receipt_in_1_parking_lot() throws InvalidReceiptException {
+        ParkingLot parkingLot = new ParkingLot(1);
+        parkingLot.pickBy(null);
+    }
 }

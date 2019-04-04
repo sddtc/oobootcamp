@@ -1,5 +1,6 @@
 package parkinglot.beta;
 
+import parkinglot.beta.exceptions.InvalidReceiptException;
 import parkinglot.beta.exceptions.NoSpaceInParkingLotException;
 
 import java.util.HashMap;
@@ -22,7 +23,10 @@ public class ParkingLot {
         return receipt;
     }
 
-    public Car pickBy(Receipt receipt) {
+    public Car pickBy(Receipt receipt) throws InvalidReceiptException {
+        if (null == receipt) {
+            throw new InvalidReceiptException("Invalid receipt!");
+        }
         return parkingLot.get(receipt);
     }
 }
