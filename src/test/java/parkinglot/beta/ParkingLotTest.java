@@ -51,4 +51,13 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(1);
         parkingLot.pickBy(null);
     }
+
+    @Test(expected = InvalidReceiptException.class)
+    public void should_throw_error_when_picking_1_car_given_1_invalid_receipt_in_1_parking_lot() throws InvalidReceiptException, NoSpaceInParkingLotException {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Receipt invalidReceipt = new Receipt();
+        Car myCar = new Car();
+        parkingLot.park(myCar);
+        Assert.assertNotSame(myCar, parkingLot.pickBy(invalidReceipt));
+    }
 }

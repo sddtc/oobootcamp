@@ -24,7 +24,7 @@ public class ParkingLot {
     }
 
     public Car pickBy(Receipt receipt) throws InvalidReceiptException {
-        if (null == receipt) {
+        if (null == receipt || !parkingLot.containsKey(receipt)) {
             throw new InvalidReceiptException("Invalid receipt!");
         }
         return parkingLot.get(receipt);
