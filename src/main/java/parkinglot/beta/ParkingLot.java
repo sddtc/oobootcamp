@@ -14,7 +14,7 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
-    public Receipt park(Car car) throws NoSpaceInParkingLotException {
+    public Receipt park(Car car) {
         if (parkingLot.size() >= capacity) {
             throw new NoSpaceInParkingLotException("No parking space!");
         }
@@ -23,7 +23,7 @@ public class ParkingLot {
         return receipt;
     }
 
-    public Car pickBy(Receipt receipt) throws InvalidReceiptException {
+    public Car pickBy(Receipt receipt) {
         if (null == receipt || !parkingLot.containsKey(receipt)) {
             throw new InvalidReceiptException("Invalid receipt!");
         }
