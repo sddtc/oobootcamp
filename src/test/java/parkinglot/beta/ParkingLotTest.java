@@ -30,5 +30,11 @@ public class ParkingLotTest {
         parkingLot.park(new Car());
     }
 
+    @Test(expected = NoSpaceInParkingLotException.class)
+    public void should_throw_error_when_parking_1_car_given_0_free_space_in_1_parking_lot() throws NoSpaceInParkingLotException {
+        ParkingLot parkingLot = new ParkingLot(0);
+        parkingLot.park(new Car());
+    }
 
+    
 }
