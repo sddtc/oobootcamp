@@ -2,6 +2,7 @@ package parkinglot.beta;
 
 import org.junit.Assert;
 import org.junit.Test;
+import parkinglot.beta.exceptions.NoSpaceInParkingLotException;
 
 import static java.util.Arrays.asList;
 
@@ -41,4 +42,13 @@ public class ParkingLotBoyTest {
         Assert.assertSame(car, parkingLot2.pickBy(receipt));
     }
 
+    @Test(expected = NoSpaceInParkingLotException.class)
+    public void should_parking_1_car_failed_when_parkingboy_parking_1_car_given_2_parking_lots_with_free_space_0_0() {
+        ParkingLot parkingLot = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot(0);
+        ParkingLotBoy parkingLotBoy = new ParkingLotBoy(asList(parkingLot, parkingLot2));
+
+        Car car = new Car();
+        parkingLotBoy.park(car);
+    }
 }
