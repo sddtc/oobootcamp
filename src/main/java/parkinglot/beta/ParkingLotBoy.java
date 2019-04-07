@@ -13,7 +13,9 @@ public class ParkingLotBoy {
 
     public Receipt park(Car car) {
         for (ParkingLot parkingLot : parkingLots) {
-            return parkingLot.park(car);
+            if(parkingLot.hasFreeSpaces()) {
+                return parkingLot.park(car);
+            }
         }
         throw new NoSpaceInParkingLotException("No parking space!");
     }

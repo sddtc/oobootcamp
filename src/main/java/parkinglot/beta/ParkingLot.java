@@ -29,6 +29,10 @@ public class ParkingLot {
         }
         return parkingLot.remove(receipt);
     }
+
+    public boolean hasFreeSpaces() {
+        return this.parkingLot.size() < capacity;
+    }
 }
 
 
