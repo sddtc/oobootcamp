@@ -33,6 +33,11 @@ public class ParkingLot {
     public boolean hasFreeSpaces() {
         return this.parkingLot.size() < capacity;
     }
+
+    public boolean containsCarBy(Receipt receipt) {
+        return parkingLot.containsKey(receipt);
+    }
+
     public int availableSpaces() {
         return capacity - parkingLot.size();
     }

@@ -26,7 +26,9 @@ public class SmartParkingLotBoy {
 
     public Car pickBy(Receipt receipt) {
         for (ParkingLot parkingLot : this.parkingLots) {
-            return parkingLot.pickBy(receipt);
+            if (parkingLot.containsCarBy(receipt)) {
+                return parkingLot.pickBy(receipt);
+            }
         }
         throw new InvalidReceiptException("Invalid receipt!");
     }

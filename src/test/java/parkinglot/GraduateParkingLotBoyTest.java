@@ -36,9 +36,9 @@ public class GraduateParkingLotBoyTest {
         ParkingLot parkingLot2 = new ParkingLot(1);
         ParkingLot parkingLot3 = new ParkingLot(2);
         GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot, parkingLot2, parkingLot3));
-
         Car car = new Car();
         Receipt receipt = graduateParkingLotBoy.park(car);
+
         Assert.assertSame(car, parkingLot2.pickBy(receipt));
     }
 
@@ -56,9 +56,9 @@ public class GraduateParkingLotBoyTest {
     public void should_picking_1_car_success_when_parkingboy_picking_1_car_given_1_no_free_space_parking_lot() {
         ParkingLot parkingLot = new ParkingLot(1);
         GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot));
-
         Car car = new Car();
-        Receipt receipt = graduateParkingLotBoy.park(car);
+        Receipt receipt = parkingLot.park(car);
+
         Assert.assertSame(car, graduateParkingLotBoy.pickBy(receipt));
     }
 
@@ -66,10 +66,21 @@ public class GraduateParkingLotBoyTest {
     public void should_picking_1_car_failed_when_parkingboy_picking_1_car_twice_given_1_valid_receipt() {
         ParkingLot parkingLot = new ParkingLot(1);
         GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot));
-
         Car car = new Car();
-        Receipt receipt = graduateParkingLotBoy.park(car);
+        Receipt receipt = parkingLot.park(car);
+
         Assert.assertSame(car, graduateParkingLotBoy.pickBy(receipt));
         graduateParkingLotBoy.pickBy(receipt);
+    }
+
+    @Test
+    public void should_picking_1_car_success_when_parkingboy_picking_1_car_given_2_parkinglots_and_both_have_1_free_space() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(1);
+        GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot, parkingLot2));
+        Car car = new Car();
+        Receipt receipt = parkingLot2.park(car);
+
+        Assert.assertSame(car, graduateParkingLotBoy.pickBy(receipt));
     }
 }
