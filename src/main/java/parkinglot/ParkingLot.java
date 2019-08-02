@@ -1,7 +1,7 @@
-package parkinglot.beta;
+package parkinglot;
 
-import parkinglot.beta.exceptions.InvalidReceiptException;
-import parkinglot.beta.exceptions.NoSpaceInParkingLotException;
+import parkinglot.exceptions.InvalidReceiptException;
+import parkinglot.exceptions.NoSpaceInParkingLotException;
 
 import java.util.HashMap;
 import java.util.Map;

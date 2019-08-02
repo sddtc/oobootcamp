@@ -1,14 +1,14 @@
-package parkinglot.beta;
+package parkinglot;
 
-import parkinglot.beta.exceptions.InvalidReceiptException;
-import parkinglot.beta.exceptions.NoSpaceInParkingLotException;
+import parkinglot.exceptions.InvalidReceiptException;
+import parkinglot.exceptions.NoSpaceInParkingLotException;
 
 import java.util.List;
 
-public class ParkingLotBoy {
+public class GraduateParkingLotBoy {
     final private List<ParkingLot> parkingLots;
 
-    public ParkingLotBoy(List<ParkingLot> parkingLots) {
+    public GraduateParkingLotBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 

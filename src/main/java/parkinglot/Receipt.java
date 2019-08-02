@@ -1,4 +1,4 @@
-package parkinglot.beta;
+package parkinglot;
 
 public class Receipt {
 }

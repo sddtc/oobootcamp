@@ -1,9 +1,9 @@
-package parkinglot.beta;
+package parkinglot;
 
 import org.junit.Assert;
 import org.junit.Test;
-import parkinglot.beta.exceptions.InvalidReceiptException;
-import parkinglot.beta.exceptions.NoSpaceInParkingLotException;
+import parkinglot.exceptions.InvalidReceiptException;
+import parkinglot.exceptions.NoSpaceInParkingLotException;
 
 
 public class ParkingLotTest {
