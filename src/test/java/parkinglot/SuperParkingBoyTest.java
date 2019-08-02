@@ -2,6 +2,7 @@ package parkinglot;
 
 import org.junit.Assert;
 import org.junit.Test;
+import parkinglot.exceptions.InvalidReceiptException;
 
 import static java.util.Arrays.asList;
 
@@ -57,4 +58,14 @@ public class SuperParkingBoyTest {
         Assert.assertSame(car, superParkingBoy.pickBy(receipt));
     }
 
+    @Test(expected = InvalidReceiptException.class)
+    public void should_pick_car_failed_when_pick_twice_given_valid_receipt() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(asList(parkingLot));
+        Car car = new Car();
+        Receipt receipt = parkingLot.park(car);
+
+        superParkingBoy.pickBy(receipt);
+        superParkingBoy.pickBy(receipt);
+    }
 }
