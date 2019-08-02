@@ -1,41 +1,46 @@
 package parkinglot;
 
-import parkinglot.exception.InvalidReceiptException;
-import parkinglot.exception.NoParkingException;
+import parkinglot.exceptions.InvalidReceiptException;
+import parkinglot.exceptions.NoSpaceInParkingLotException;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
-    private final int capacity;
-    private final Map<ParkingLotReceipt, Car> parkingLotReceipts = new HashMap<>();
+    final private int capacity;
+    final private Map<Receipt, Car> parkingLot = new HashMap<>();
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
     }
 
-    public ParkingLotReceipt park(Car car) throws NoParkingException {
-        if (parkingLotReceipts.size() >= this.capacity) {
-            throw new NoParkingException("Can\'t stop car!");
+    public Receipt park(Car car) {
+        if (parkingLot.size() >= capacity) {
+            throw new NoSpaceInParkingLotException("No parking space!");
         }
-        return dispatchReceipt(car);
-    }
-
-    public Car fetchOutCar(ParkingLotReceipt receipt) throws InvalidReceiptException {
-        if (receipt == null || !isReceiptValid(receipt)) {
-            throw new InvalidReceiptException("isReceiptValid receipt");
-        }
-
-        return parkingLotReceipts.remove(receipt);
-    }
-
-    private ParkingLotReceipt dispatchReceipt(Car car) {
-        ParkingLotReceipt receipt = new ParkingLotReceipt();
-        parkingLotReceipts.put(receipt, car);
+        Receipt receipt = new Receipt();
+        parkingLot.put(receipt, car);
         return receipt;
     }
 
-    private boolean isReceiptValid(ParkingLotReceipt receipt) {
-        return parkingLotReceipts.containsKey(receipt);
+    public Car pickBy(Receipt receipt) {
+        if (null == receipt || !parkingLot.containsKey(receipt)) {
+            throw new InvalidReceiptException("Invalid receipt!");
+        }
+        return parkingLot.remove(receipt);
+    }
+
+    public boolean hasFreeSpaces() {
+        return this.parkingLot.size() < capacity;
+    }
+
+    public boolean containsCarBy(Receipt receipt) {
+        return parkingLot.containsKey(receipt);
+    }
+
+    public int availableSpaces() {
+        return capacity - parkingLot.size();
     }
 }
+
+

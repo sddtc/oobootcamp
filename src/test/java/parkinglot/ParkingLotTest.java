@@ -2,75 +2,71 @@ package parkinglot;
 
 import org.junit.Assert;
 import org.junit.Test;
-import parkinglot.exception.InvalidReceiptException;
-import parkinglot.exception.NoParkingException;
+import parkinglot.exceptions.InvalidReceiptException;
+import parkinglot.exceptions.NoSpaceInParkingLotException;
+
 
 public class ParkingLotTest {
     @Test
-    public void should_parking_success_when_parking_car_given_one_parking_lot() throws NoParkingException {
+    public void should_return_a_receipt_when_paring_1_car_given_1_free_space_in_1_parking_lot() {
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingLotReceipt receipt = parkingLot.park(new Car());
+        Receipt receipt = parkingLot.park(new Car());
 
         Assert.assertNotNull(receipt);
     }
 
     @Test
-    public void should_parking_success_when_parking_two_cars_given_two_receipts() throws NoParkingException {
+    public void should_return_two_diff_receipts_when_parking_2_cars_give_2_free_spaces_in_1_parking_lot() {
         ParkingLot parkingLot = new ParkingLot(2);
-        ParkingLotReceipt oneCarReceipt = parkingLot.park(new Car());
-        ParkingLotReceipt anotherCarReceipt = parkingLot.park(new Car());
+        Receipt receipt = parkingLot.park(new Car());
+        Receipt receipt2 = parkingLot.park(new Car());
 
-        Assert.assertNotSame(oneCarReceipt, anotherCarReceipt);
+        Assert.assertNotSame(receipt, receipt2);
     }
 
-    @Test(expected = NoParkingException.class)
-    public void should_parking_fail_when_parking_car_given_zero_parking_lot() throws NoParkingException {
+    @Test(expected = NoSpaceInParkingLotException.class)
+    public void should_return_error_when_parking_2_cars_given_1_free_space_in_1_parking_lot() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Assert.assertNotNull(parkingLot.park(new Car()));
+        parkingLot.park(new Car());
+    }
+
+    @Test(expected = NoSpaceInParkingLotException.class)
+    public void should_throw_error_when_parking_1_car_given_0_free_space_in_1_parking_lot() {
         ParkingLot parkingLot = new ParkingLot(0);
         parkingLot.park(new Car());
     }
 
-    @Test(expected = NoParkingException.class)
-    public void should_parking_fail_when_parking_two_cars_given_one_parking_lot() throws NoParkingException {
-        ParkingLot parkingLot = new ParkingLot(1);
-        ParkingLotReceipt oneCarReceipt = parkingLot.park(new Car());
-
-        parkingLot.park(new Car());
-        Assert.assertNotNull(oneCarReceipt);
-    }
-
     @Test
-    public void should_return_my_car_when_fetch_out_my_car_given_a_receipt() throws NoParkingException, InvalidReceiptException {
+    public void should_pick_car_success_when_picking_1_car_given_1_valid_receipt_in_1_parking_lot() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car = new Car();
+        Receipt receipt = parkingLot.park(car);
+
+        Assert.assertSame(car, parkingLot.pickBy(receipt));
+    }
+
+    @Test(expected = InvalidReceiptException.class)
+    public void should_throw_error_when_picking_1_car_given_0_receipt_in_1_parking_lot() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        parkingLot.pickBy(null);
+    }
+
+    @Test(expected = InvalidReceiptException.class)
+    public void should_throw_error_when_picking_1_car_given_1_invalid_receipt_in_1_parking_lot() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Receipt invalidReceipt = new Receipt();
+        Car myCar = new Car();
+        parkingLot.park(myCar);
+        Assert.assertNotSame(myCar, parkingLot.pickBy(invalidReceipt));
+    }
+
+    @Test(expected = InvalidReceiptException.class)
+    public void should_throw_error_when_picking_1_car_twice_given_1_valid_receipt_in_1_parking_lot() {
         ParkingLot parkingLot = new ParkingLot(1);
         Car myCar = new Car();
-        ParkingLotReceipt receipt = parkingLot.park(myCar);
-
-        Assert.assertSame(myCar, parkingLot.fetchOutCar(receipt));
-    }
-
-    @Test(expected = InvalidReceiptException.class)
-    public void should_throw_exception_when_fetch_out_car_given_zero_receipt() throws NoParkingException, InvalidReceiptException {
-        ParkingLot parkingLot = new ParkingLot(1);
-        parkingLot.park(new Car());
-
-        parkingLot.fetchOutCar(null);
-    }
-
-    @Test(expected = InvalidReceiptException.class)
-    public void should_throw_exception_when_fetch_out_car_given_invalid_receipt() throws NoParkingException, InvalidReceiptException {
-        ParkingLot parkingLot = new ParkingLot(1);
-        ParkingLotReceipt invalidReceipt = new ParkingLotReceipt();
-        parkingLot.park(new Car());
-
-        parkingLot.fetchOutCar(invalidReceipt);
-    }
-
-    @Test(expected = InvalidReceiptException.class)
-    public void should_throw_exception_when_fetch_out_car_twice_given_a_receipt() throws NoParkingException, InvalidReceiptException {
-        ParkingLot parkingLot = new ParkingLot(1);
-        Car myCar = new Car();
-        ParkingLotReceipt parkingLotReceipt = parkingLot.park(myCar);
-
-        Assert.assertSame(myCar, parkingLot.fetchOutCar(parkingLotReceipt));
-        parkingLot.fetchOutCar(parkingLotReceipt);
+        Receipt receipt = parkingLot.park(myCar);
+        parkingLot.pickBy(receipt);
+        parkingLot.pickBy(receipt);
     }
 }
