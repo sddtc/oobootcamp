@@ -46,4 +46,15 @@ public class SuperParkingBoyTest {
         Assert.assertNotNull(receipt);
         Assert.assertSame(car, parkingLot.pickBy(receipt));
     }
+
+    @Test
+    public void should_pick_car_success_when_pick_given_valid_receipt() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(asList(parkingLot));
+        Car car = new Car();
+        Receipt receipt = parkingLot.park(car);
+
+        Assert.assertSame(car, superParkingBoy.pickBy(receipt));
+    }
+
 }

@@ -20,4 +20,8 @@ public class SuperParkingBoy {
         }
         throw new NoSpaceInParkingLotException("No parking space!");
     }
+
+    public Car pickBy(Receipt receipt) {
+        return parkingLots.get(0).pickBy(receipt);
+    }
 }
