@@ -1,6 +1,10 @@
 package parkinglot;
 
+import parkinglot.exceptions.NoSpaceInParkingLotException;
+
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class SuperParkingBoy {
     private List<ParkingLot> parkingLots;
@@ -10,6 +14,10 @@ public class SuperParkingBoy {
     }
 
     public Receipt park(Car car) {
-        return parkingLots.get(0).park(car);
+        Optional<ParkingLot> parkingLot = parkingLots.stream().max(Comparator.comparing(ParkingLot::availableSpacesRate));
+        if (parkingLot.isPresent()) {
+            return parkingLot.get().park(car);
+        }
+        throw new NoSpaceInParkingLotException("No parking space!");
     }
 }

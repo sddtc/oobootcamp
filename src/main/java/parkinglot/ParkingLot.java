@@ -41,6 +41,8 @@ public class ParkingLot {
     public int availableSpaces() {
         return capacity - parkingLot.size();
     }
+
+    public float availableSpacesRate() {
+        return (float) (this.availableSpaces() * 1.0 / parkingLot.size());
+    }
 }
-
-
