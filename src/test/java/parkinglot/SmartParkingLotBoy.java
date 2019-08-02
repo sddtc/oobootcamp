@@ -1,5 +1,6 @@
 package parkinglot;
 
+import parkinglot.exceptions.InvalidReceiptException;
 import parkinglot.exceptions.NoSpaceInParkingLotException;
 
 import java.util.Comparator;
@@ -21,5 +22,12 @@ public class SmartParkingLotBoy {
             return parkingLot.get().park(car);
         }
         throw new NoSpaceInParkingLotException("No parking space!");
+    }
+
+    public Car pickBy(Receipt receipt) {
+        for (ParkingLot parkingLot : this.parkingLots) {
+            return parkingLot.pickBy(receipt);
+        }
+        throw new InvalidReceiptException("Invalid receipt!");
     }
 }
