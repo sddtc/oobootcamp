@@ -23,9 +23,7 @@ public class GraduateParkingLotBoy {
 
     public Car pickBy(Receipt receipt) {
         for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.containsCarBy(receipt)) {
-                return parkingLot.pickBy(receipt);
-            }
+            return parkingLot.pickBy(receipt);
         }
         throw new InvalidReceiptException("Invalid receipt!");
     }

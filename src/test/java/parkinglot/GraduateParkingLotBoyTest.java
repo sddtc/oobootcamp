@@ -8,7 +8,6 @@ import parkinglot.exceptions.NoSpaceInParkingLotException;
 import static java.util.Arrays.asList;
 
 public class GraduateParkingLotBoyTest {
-
     @Test
     public void should_parking_1_car_success_when_parkingboy_parking_1_car_given_2_parking_lots_with_free_space_1_2() {
         ParkingLot parkingLot = new ParkingLot(1);
