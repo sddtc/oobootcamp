@@ -33,4 +33,17 @@ public class SuperParkingBoyTest {
         Assert.assertNotNull(receipt);
         Assert.assertSame(car, parkingLot2.pickBy(receipt));
     }
+
+    @Test
+    public void should_park_in_1st_parkinglot_when_boy_park_car_given_he_manage_2_parkinglots_with_1_free_space_and_1_free_space() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(1);
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(asList(parkingLot, parkingLot2));
+
+        Car car = new Car();
+        Receipt receipt = superParkingBoy.park(car);
+
+        Assert.assertNotNull(receipt);
+        Assert.assertSame(car, parkingLot.pickBy(receipt));
+    }
 }
