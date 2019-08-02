@@ -1,5 +1,6 @@
 package parkinglot;
 
+import parkinglot.exceptions.InvalidReceiptException;
 import parkinglot.exceptions.NoSpaceInParkingLotException;
 
 import java.util.Comparator;
@@ -22,6 +23,11 @@ public class SuperParkingBoy {
     }
 
     public Car pickBy(Receipt receipt) {
-        return parkingLots.get(0).pickBy(receipt);
+        for (ParkingLot parkingLot : this.parkingLots) {
+            if (parkingLot.containsCarBy(receipt)) {
+                return parkingLot.pickBy(receipt);
+            }
+        }
+        throw new InvalidReceiptException("Invalid receipt!");
     }
 }

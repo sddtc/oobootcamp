@@ -68,4 +68,15 @@ public class SuperParkingBoyTest {
         superParkingBoy.pickBy(receipt);
         superParkingBoy.pickBy(receipt);
     }
+
+    @Test
+    public void should_pick_car_success_when_pick_given_smart_parkinglot_boy_manege_2_parkinglots_and_i_hava_valid_receipt_in_2nd_parkinglot() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(1);
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(asList(parkingLot, parkingLot2));
+        Car car = new Car();
+        Receipt receipt = parkingLot2.park(car);
+
+        Assert.assertSame(car, superParkingBoy.pickBy(receipt));
+    }
 }
