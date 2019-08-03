@@ -10,6 +10,7 @@ public class GraduateParkingLotBoy extends ParkingLotBoy {
         super(parkingLots);
     }
 
+    @Override
     public Receipt park(Car car) {
         for (ParkingLot parkingLot : parkingLots) {
             if (parkingLot.hasFreeSpaces()) {

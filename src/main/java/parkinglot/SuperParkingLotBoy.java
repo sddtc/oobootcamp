@@ -7,12 +7,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class SuperParkingBoy extends ParkingLotBoy {
+public class SuperParkingLotBoy extends ParkingLotBoy {
 
-    public SuperParkingBoy(List<ParkingLot> parkingLots) {
+    public SuperParkingLotBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
     }
 
+    @Override
     public Receipt park(Car car) {
         Optional<ParkingLot> parkingLot = parkingLots.stream().max(Comparator.comparing(ParkingLot::availableSpacesRate));
         if (parkingLot.isPresent()) {

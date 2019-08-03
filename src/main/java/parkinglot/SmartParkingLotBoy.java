@@ -12,6 +12,7 @@ public class SmartParkingLotBoy extends ParkingLotBoy {
         super(parkingLots);
     }
 
+    @Override
     public Receipt park(Car car) {
         Optional<ParkingLot> parkingLot = this.parkingLots.stream()
                 .max(Comparator.comparing(ParkingLot::availableSpaces));

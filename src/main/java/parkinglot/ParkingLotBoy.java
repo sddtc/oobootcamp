@@ -1,6 +1,7 @@
 package parkinglot;
 
 import parkinglot.exceptions.InvalidReceiptException;
+import parkinglot.exceptions.NoSpaceInParkingLotException;
 
 import java.util.List;
 
@@ -9,6 +10,10 @@ public class ParkingLotBoy {
 
     public ParkingLotBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
+    }
+
+    public Receipt park(Car car) {
+        throw new NoSpaceInParkingLotException("No parking space!");
     }
 
     public Car pickBy(Receipt receipt) {
