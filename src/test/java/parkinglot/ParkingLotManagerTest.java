@@ -34,4 +34,18 @@ public class ParkingLotManagerTest {
         Assert.assertNotNull(receipt);
         Assert.assertNotNull(receipt2);
     }
+
+    @Test
+    public void should_park_cars_success_when_park_car_given_manager_manage_boy_with_parkinglot_without_space_and_manage_has_parkinglot_with_free_space_1() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(1);
+        GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot));
+        graduateParkingLotBoy.park(new Car());
+        ParkingLotManager parkingLotManager = new ParkingLotManager(asList(graduateParkingLotBoy), asList(parkingLot2));
+
+        Car car = new Car();
+        Receipt receipt = parkingLotManager.park(car);
+
+        Assert.assertNotNull(receipt);
+    }
 }
