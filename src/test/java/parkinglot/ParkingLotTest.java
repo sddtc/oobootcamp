@@ -8,7 +8,7 @@ import parkinglot.exceptions.NoSpaceInParkingLotException;
 
 public class ParkingLotTest {
     @Test
-    public void should_return_a_receipt_when_paring_1_car_given_1_free_space_in_1_parking_lot() {
+    public void should_return_a_receipt_when_park_1_car_given_1_free_space() {
         ParkingLot parkingLot = new ParkingLot(1);
         Receipt receipt = parkingLot.park(new Car());
 
@@ -16,7 +16,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_two_diff_receipts_when_parking_2_cars_give_2_free_spaces_in_1_parking_lot() {
+    public void should_return_two_diff_receipts_when_park_2_cars_give_2_free_spaces() {
         ParkingLot parkingLot = new ParkingLot(2);
         Receipt receipt = parkingLot.park(new Car());
         Receipt receipt2 = parkingLot.park(new Car());
@@ -25,20 +25,20 @@ public class ParkingLotTest {
     }
 
     @Test(expected = NoSpaceInParkingLotException.class)
-    public void should_return_error_when_parking_2_cars_given_1_free_space_in_1_parking_lot() {
+    public void should_return_error_when_park_2_cars_given_1_free_space() {
         ParkingLot parkingLot = new ParkingLot(1);
         Assert.assertNotNull(parkingLot.park(new Car()));
         parkingLot.park(new Car());
     }
 
     @Test(expected = NoSpaceInParkingLotException.class)
-    public void should_throw_error_when_parking_1_car_given_0_free_space_in_1_parking_lot() {
+    public void should_throw_error_when_park_1_car_given_0_free_space() {
         ParkingLot parkingLot = new ParkingLot(0);
         parkingLot.park(new Car());
     }
 
     @Test
-    public void should_pick_car_success_when_picking_1_car_given_1_valid_receipt_in_1_parking_lot() {
+    public void should_pick_car_success_when_pick_1_car_given_valid_receipt() {
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
         Receipt receipt = parkingLot.park(car);
@@ -47,13 +47,13 @@ public class ParkingLotTest {
     }
 
     @Test(expected = InvalidReceiptException.class)
-    public void should_throw_error_when_picking_1_car_given_0_receipt_in_1_parking_lot() {
+    public void should_throw_error_when_pick_1_car_given_without_receipt() {
         ParkingLot parkingLot = new ParkingLot(1);
         parkingLot.pickBy(null);
     }
 
     @Test(expected = InvalidReceiptException.class)
-    public void should_throw_error_when_picking_1_car_given_1_invalid_receipt_in_1_parking_lot() {
+    public void should_throw_error_when_pick_1_car_given_invalid_receipt() {
         ParkingLot parkingLot = new ParkingLot(1);
         Receipt invalidReceipt = new Receipt();
         Car myCar = new Car();
@@ -62,7 +62,7 @@ public class ParkingLotTest {
     }
 
     @Test(expected = InvalidReceiptException.class)
-    public void should_throw_error_when_picking_1_car_twice_given_1_valid_receipt_in_1_parking_lot() {
+    public void should_throw_error_when_pick_1_car_twice_given_valid_receipt() {
         ParkingLot parkingLot = new ParkingLot(1);
         Car myCar = new Car();
         Receipt receipt = parkingLot.park(myCar);

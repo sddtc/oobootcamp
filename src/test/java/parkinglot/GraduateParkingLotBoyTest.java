@@ -9,7 +9,7 @@ import static java.util.Arrays.asList;
 
 public class GraduateParkingLotBoyTest {
     @Test
-    public void should_parking_1_car_success_when_parkingboy_parking_1_car_given_2_parking_lots_with_free_space_1_2() {
+    public void should_parking_1_car_success_when_parkinglot_boy_parking_1_car_given_2_parkinglots_with_free_space_1_2() {
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingLot parkingLot2 = new ParkingLot(2);
         GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot, parkingLot2));
@@ -20,7 +20,7 @@ public class GraduateParkingLotBoyTest {
     }
 
     @Test
-    public void should_parking_1_car_in_the_second_success_when_parkingboy_parking_1_car_given_2_parking_lots_with_free_space_2_1() {
+    public void should_parking_1_car_in_the_second_success_when_parkinglot_boy_parking_1_car_given_2_parkinglots_with_free_space_2_1() {
         ParkingLot parkingLot = new ParkingLot(2);
         ParkingLot parkingLot2 = new ParkingLot(1);
         GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot, parkingLot2));
@@ -31,7 +31,7 @@ public class GraduateParkingLotBoyTest {
     }
 
     @Test
-    public void should_parking_1_car_in_the_second_success_when_parkingboy_parking_1_car_given_3_parking_lots_with_free_space_0_1_2() {
+    public void should_parking_1_car_in_the_second_success_when_parkinglot_boy_parking_1_car_given_3_parkinglots_with_free_space_0_1_2() {
         ParkingLot parkingLot = new ParkingLot(0);
         ParkingLot parkingLot2 = new ParkingLot(1);
         ParkingLot parkingLot3 = new ParkingLot(2);
@@ -43,7 +43,7 @@ public class GraduateParkingLotBoyTest {
     }
 
     @Test(expected = NoSpaceInParkingLotException.class)
-    public void should_parking_1_car_failed_when_parkingboy_parking_1_car_given_2_parking_lots_with_free_space_0_0() {
+    public void should_parking_1_car_failed_when_parkinglot_boy_parking_1_car_given_2_parking_lots_with_free_space_0_0() {
         ParkingLot parkingLot = new ParkingLot(0);
         ParkingLot parkingLot2 = new ParkingLot(0);
         GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot, parkingLot2));
@@ -53,7 +53,7 @@ public class GraduateParkingLotBoyTest {
     }
 
     @Test
-    public void should_picking_1_car_success_when_parkingboy_picking_1_car_given_1_no_free_space_parking_lot() {
+    public void should_picking_1_car_success_when_parkinglot_boy_picking_1_car_given_1_no_free_space_parkinglot() {
         ParkingLot parkingLot = new ParkingLot(1);
         GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot));
         Car car = new Car();
@@ -63,7 +63,7 @@ public class GraduateParkingLotBoyTest {
     }
 
     @Test(expected = InvalidReceiptException.class)
-    public void should_picking_1_car_failed_when_parkingboy_picking_1_car_twice_given_1_valid_receipt() {
+    public void should_picking_1_car_failed_when_parkinglot_boy_picking_1_car_twice_given_1_valid_receipt() {
         ParkingLot parkingLot = new ParkingLot(1);
         GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot));
         Car car = new Car();
@@ -74,7 +74,7 @@ public class GraduateParkingLotBoyTest {
     }
 
     @Test
-    public void should_picking_1_car_success_when_parkingboy_picking_1_car_given_2_parkinglots_and_both_have_1_free_space() {
+    public void should_picking_1_car_success_when_parkinglot_boy_picking_1_car_given_2_parkinglots_and_both_have_1_free_space() {
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingLot parkingLot2 = new ParkingLot(1);
         GraduateParkingLotBoy graduateParkingLotBoy = new GraduateParkingLotBoy(asList(parkingLot, parkingLot2));

@@ -1,19 +1,16 @@
 package parkinglot;
 
-import parkinglot.exceptions.InvalidReceiptException;
 import parkinglot.exceptions.NoSpaceInParkingLotException;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class SmartParkingLotBoy {
-    private List<ParkingLot> parkingLots;
+public class SmartParkingLotBoy extends ParkingLotBoy {
 
     public SmartParkingLotBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+        super(parkingLots);
     }
-
 
     public Receipt park(Car car) {
         Optional<ParkingLot> parkingLot = this.parkingLots.stream()
@@ -22,14 +19,5 @@ public class SmartParkingLotBoy {
             return parkingLot.get().park(car);
         }
         throw new NoSpaceInParkingLotException("No parking space!");
-    }
-
-    public Car pickBy(Receipt receipt) {
-        for (ParkingLot parkingLot : this.parkingLots) {
-            if (parkingLot.containsCarBy(receipt)) {
-                return parkingLot.pickBy(receipt);
-            }
-        }
-        throw new InvalidReceiptException("Invalid receipt!");
     }
 }

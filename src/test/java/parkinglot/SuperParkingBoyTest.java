@@ -8,7 +8,7 @@ import static java.util.Arrays.asList;
 
 public class SuperParkingBoyTest {
     @Test
-    public void should_park_in_1st_parkinglot_when_boy_park_car_given_he_manage_2_parkinglots_with_1_free_space_and_2_free_space() {
+    public void should_park_in_1st_success_when_boy_park_given_boy_manage_2_parkinglots_with_free_space_1_2() {
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingLot parkingLot2 = new ParkingLot(2);
         SuperParkingBoy superParkingBoy = new SuperParkingBoy(asList(parkingLot, parkingLot2));
@@ -22,7 +22,7 @@ public class SuperParkingBoyTest {
     }
 
     @Test
-    public void should_park_in_2nd_parkinglot_when_boy_park_car_given_he_manage_2_parkinglots_one_has_2_spaces_another_has_1_space_with_1_free_space_and_1_free_space() {
+    public void should_park_in_2nd_success_when_park_given_boy_manage_2_parkinglots_with_capacity_2_1_and_free_spaces_1_1() {
         ParkingLot parkingLot = new ParkingLot(2);
         ParkingLot parkingLot2 = new ParkingLot(1);
         SuperParkingBoy superParkingBoy = new SuperParkingBoy(asList(parkingLot, parkingLot2));
@@ -36,7 +36,7 @@ public class SuperParkingBoyTest {
     }
 
     @Test
-    public void should_park_in_1st_parkinglot_when_boy_park_car_given_he_manage_2_parkinglots_with_1_free_space_and_1_free_space() {
+    public void should_park_in_1st_success_when_park_car_given_boy_manage_2_parkinglots_with_capacity_1_1_with_free_space_1_1() {
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingLot parkingLot2 = new ParkingLot(1);
         SuperParkingBoy superParkingBoy = new SuperParkingBoy(asList(parkingLot, parkingLot2));
@@ -46,6 +46,19 @@ public class SuperParkingBoyTest {
 
         Assert.assertNotNull(receipt);
         Assert.assertSame(car, parkingLot.pickBy(receipt));
+    }
+
+    @Test
+    public void should_park_in_2nd_success_when_park_car_given_boy_manage_2_parkinglots_with_capacity_0_1_with_free_space_0_1() {
+        ParkingLot parkingLot = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot(1);
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(asList(parkingLot, parkingLot2));
+
+        Car car = new Car();
+        Receipt receipt = superParkingBoy.park(car);
+
+        Assert.assertNotNull(receipt);
+        Assert.assertSame(car, parkingLot2.pickBy(receipt));
     }
 
     @Test
@@ -70,7 +83,7 @@ public class SuperParkingBoyTest {
     }
 
     @Test
-    public void should_pick_car_success_when_pick_given_smart_parkinglot_boy_manege_2_parkinglots_and_i_hava_valid_receipt_in_2nd_parkinglot() {
+    public void should_pick_car_success_when_pick_given_boy_manage_2_parkinglots_and_valid_receipt_in_2nd_parkinglot() {
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingLot parkingLot2 = new ParkingLot(1);
         SuperParkingBoy superParkingBoy = new SuperParkingBoy(asList(parkingLot, parkingLot2));

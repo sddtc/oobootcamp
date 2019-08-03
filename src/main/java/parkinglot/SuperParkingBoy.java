@@ -7,11 +7,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class SuperParkingBoy {
-    private List<ParkingLot> parkingLots;
+public class SuperParkingBoy extends ParkingLotBoy {
 
     public SuperParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+        super(parkingLots);
     }
 
     public Receipt park(Car car) {
@@ -20,14 +19,5 @@ public class SuperParkingBoy {
             return parkingLot.get().park(car);
         }
         throw new NoSpaceInParkingLotException("No parking space!");
-    }
-
-    public Car pickBy(Receipt receipt) {
-        for (ParkingLot parkingLot : this.parkingLots) {
-            if (parkingLot.containsCarBy(receipt)) {
-                return parkingLot.pickBy(receipt);
-            }
-        }
-        throw new InvalidReceiptException("Invalid receipt!");
     }
 }
