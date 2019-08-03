@@ -48,4 +48,17 @@ public class ParkingLotManagerTest {
 
         Assert.assertNotNull(receipt);
     }
+
+
+    @Test
+    public void should_pick_car_success_when_pick_given_parkinglot_manager_with_valid_receipt() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        SuperParkingLotBoy superParkingLotBoy = new SuperParkingLotBoy(asList(parkingLot));
+        ParkingLotManager parkingLotManager = new ParkingLotManager(asList(superParkingLotBoy));
+        Car car = new Car();
+        Receipt receipt = superParkingLotBoy.park(car);
+
+        Car myCar = parkingLotManager.pickBy(receipt);
+        Assert.assertSame(car, myCar);
+    }
 }
