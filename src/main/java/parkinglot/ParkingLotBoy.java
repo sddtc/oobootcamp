@@ -24,4 +24,8 @@ public class ParkingLotBoy {
         }
         throw new InvalidReceiptException("Invalid receipt!");
     }
+
+    public boolean hasAvailableParkingLot() {
+        return parkingLots.stream().anyMatch(ParkingLot::hasFreeSpaces);
+    }
 }
