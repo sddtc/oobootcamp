@@ -28,4 +28,9 @@ public class ParkingLotBoy {
     public boolean hasAvailableParkingLot() {
         return parkingLots.stream().anyMatch(ParkingLot::hasFreeSpaces);
     }
+
+    public boolean own(Receipt receipt) {
+        return parkingLots.stream()
+                .anyMatch(parkingLot -> parkingLot.containsCarBy(receipt));
+    }
 }

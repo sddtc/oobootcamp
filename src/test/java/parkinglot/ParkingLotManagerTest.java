@@ -61,4 +61,20 @@ public class ParkingLotManagerTest {
         Car myCar = parkingLotManager.pickBy(receipt);
         Assert.assertSame(car, myCar);
     }
+
+    @Test
+    public void should_pick_car_success_when_pick_given_parkinglot_manager_with_3_boys_with_3_parkinglots_with_free_space_1_1_1() {
+        ParkingLotManager parkingLotManager = new ParkingLotManager(asList(new SuperParkingLotBoy(asList(new ParkingLot(1))), new SmartParkingLotBoy(asList(new ParkingLot(1))), new GraduateParkingLotBoy(asList(new ParkingLot(1)))));
+
+        Car car = new Car();
+        Car car2 = new Car();
+        Car car3 = new Car();
+        Receipt receipt = parkingLotManager.park(car);
+        Receipt receipt2 = parkingLotManager.park(car2);
+        Receipt receipt3 = parkingLotManager.park(car3);
+
+        Assert.assertSame(car, parkingLotManager.pickBy(receipt));
+        Assert.assertSame(car2, parkingLotManager.pickBy(receipt2));
+        Assert.assertSame(car3, parkingLotManager.pickBy(receipt3));
+    }
 }

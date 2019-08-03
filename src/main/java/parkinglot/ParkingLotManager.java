@@ -33,7 +33,9 @@ public class ParkingLotManager {
 
     public Car pickBy(Receipt receipt) {
         for (ParkingLotBoy parkingLotBoy : parkingLotBoys) {
-            return parkingLotBoy.pickBy(receipt);
+            if(parkingLotBoy.own(receipt)) {
+                return parkingLotBoy.pickBy(receipt);
+            }
         }
         throw new InvalidReceiptException("Invalid receipt!");
     }
