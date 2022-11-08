@@ -31,6 +31,6 @@ ext.libs = [
 
 dependencies {
     testCompile libs.junit5
-    testCompile 'org.assertj:assertj-core:3.10.0'
+    testCompile 'org.assertj:assertj-core:3.23.1'
     testCompile 'org.hamcrest:hamcrest-core:2.1'
 }
